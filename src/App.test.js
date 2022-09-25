@@ -11,11 +11,10 @@ const TEST_IDS = {
   addNewEmplBtnId: 'add-new-employee-button',
   emplSalaryDivPrefix: 'employee-salary-div-',
   emplSalaryInputPrefix: 'employee-salary-input-',
-  emplSaveBtnPrefix: 'employee-save-button-'
+  emplSaveBtnPrefix: 'employee-save-button-',
 }
 
 describe('Editable Table', () => {
-
   let getByTestId
   let queryByTestId
   let table
@@ -56,7 +55,7 @@ describe('Editable Table', () => {
     expect(addNewEmplBtn).toBeDisabled()
   })
 
-  it('should result in appropriate UI changes when employee salary changes to a new valid value', () => { 
+  it('should result in appropriate UI changes when employee salary changes to a new valid value', () => {
     fireEvent.click(emplSalaryDiv2, { button: '0' })
     emplSalaryInput2 = queryByTestId(TEST_IDS.emplSalaryInputPrefix + '1')
     expect(emplSalaryInput2).toBeInTheDocument()
@@ -82,7 +81,9 @@ describe('Editable Table', () => {
     expect(addNewEmplBtn).toBeEnabled()
     fireEvent.click(addNewEmplBtn, { button: '0' })
     expect(table.rows.length).toEqual(6)
-    expect(table.rows[4].textContent).toContain('Marlyn SmithIOS Developer80000')
+    expect(table.rows[4].textContent).toContain(
+      'Marlyn SmithIOS Developer80000',
+    )
     expect(table.rows[5].textContent).toEqual('Add')
   })
 

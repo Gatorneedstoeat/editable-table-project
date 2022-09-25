@@ -3,7 +3,7 @@
 /* ------
 /* root styles */
 
-:root{
+:root {
   --brand-color: rgba(0, 152, 162, 1);
   --brand-color-dark: rgba(0, 112, 122, 1);
   --brand-box-shadow: rgba(0, 80, 90, 0.4);
@@ -28,7 +28,7 @@ button {
   letter-spacing: 0.04em;
 }
 
-button.x-small{
+button.x-small {
   font-size: 0.72rem;
 }
 
@@ -36,7 +36,7 @@ button.x-small{
   border-radius: 4px;
 }
 
-table thead tr th{
+table thead tr th {
   letter-spacing: 0.08em;
   font-size: 0.72rem;
   text-transform: uppercase;
@@ -45,7 +45,7 @@ table thead tr th{
 /* ------
 /* nav styles */
 
-nav{
+nav {
   position: absolute;
   top: 0;
   left: 0;
@@ -54,7 +54,7 @@ nav{
   text-align: center;
 }
 
-nav h1{
+nav h1 {
   font-size: 1rem;
   color: #fff;
 }
