@@ -1,0 +1,60 @@
+@import '../node_modules/h8k-design/dist/index.css';
+
+/* ------
+/* root styles */
+
+:root{
+  --brand-color: rgba(0, 152, 162, 1);
+  --brand-color-dark: rgba(0, 112, 122, 1);
+  --brand-box-shadow: rgba(0, 80, 90, 0.4);
+  --brand-box-shadow-hover: rgba(0, 20, 30, 0.3);
+  --brand-disabled: rgba(0, 220, 230, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ------
+/* general style overrides */
+
+input {
+  height: 30px;
+}
+
+button {
+  height: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+button.x-small{
+  font-size: 0.72rem;
+}
+
+.card {
+  border-radius: 4px;
+}
+
+table thead tr th{
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+/* ------
+/* nav styles */
+
+nav{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--brand-color-dark);
+  text-align: center;
+}
+
+nav h1{
+  font-size: 1rem;
+  color: #fff;
+}
