@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+
 /**
  * Table data component to add new employee
  * @param {func} onSave - callback when a new employee save button clicked
@@ -10,6 +11,7 @@ const AddEmployee = ({ onSave }) => {
     position: '',
     salary: ''
   });
+
   /**
    * set the state object property for the input
    * @param {Object} event - event obj from input
@@ -21,6 +23,7 @@ const AddEmployee = ({ onSave }) => {
       [name]: value
     }));
   };
+
   /**
    * Save the record to the parent
    */
@@ -34,6 +37,7 @@ const AddEmployee = ({ onSave }) => {
       salary: ''
     });
   };
+
   return (
     <Fragment>
       <td className="pl-30">
