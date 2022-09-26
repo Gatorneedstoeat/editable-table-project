@@ -26,6 +26,7 @@ const employeesList = [
 
 const App = () => {
   const [employees, setEmployees] = useState([]);
+
   // set employeeList object to state
   useEffect(() => {
     setEmployees(employeesList);
@@ -33,20 +34,6 @@ const App = () => {
     return () => setEmployees([]);
   }, []);
 
-  /**
-   * merge the salary change for an employee salary edit
-   * @param {Object} employeeRecord - id:number, name:string, postion:string, salary:number
-   */
-  const handleSalaryUpdate = (employeeRecord) => {
-    setEmployees((previousState) => {
-      return previousState.map((item) => {
-        if (item.id === employeeRecord.id) {
-          return { ...employeeRecord };
-        }
-        return item;
-      });
-    });
-  };
   /**
    * Create sequential ID for record and concat to state object
    * @param {Object} employeeRecord - id:number, name:string, postion:string, salary:number
@@ -58,6 +45,7 @@ const App = () => {
       return [...previousState, employeeRecord];
     });
   };
+
   return (
     <Fragment>
       <nav>
@@ -77,11 +65,7 @@ const App = () => {
             {employees &&
               employees.map((employeeInfo, idx) => (
                 <tr key={employeeInfo.id} data-testid={`row-${idx}`}>
-                  <Employee
-                    employeeInfo={employeeInfo}
-                    idx={idx}
-                    onSave={handleSalaryUpdate}
-                  />
+                  <Employee employeeInfo={employeeInfo} idx={idx} />
                 </tr>
               ))}
             <tr>
