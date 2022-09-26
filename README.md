@@ -1,6 +1,6 @@
 # React: Editable Table
 
-Complete a partially completed React editable table application. Certain core React functionalities have already been implemented. 
+Complete a partially completed React editable table application. Certain core React functionalities have already been implemented.
 
 Complete the application as shown below in order to pass all the unit tests.
 
@@ -8,76 +8,100 @@ Complete the application as shown below in order to pass all the unit tests.
 
 The application has 3 components:
 
-*   The App component, which renders the table with employee data.
-*   The Employee component, which forms an employee entry with name, position, and salary.
-*   The AddEmployee component, which consists of multiple inputs for adding a new employee entry.
+- The App component, which renders the table with employee data.
+- The Employee component, which forms an employee entry with name, position, and salary.
+- The AddEmployee component, which consists of multiple inputs for adding a new employee entry.
 
 The application has the following functionalities:
 
-*   **For the Employee component:**
+- **For the Employee component:**
 
-    *   Each employee object has the following keys:
+  - Each employee object has the following keys:
 
-        *   id: The unique ID of the employee (Integer)
+    - id: The unique ID of the employee (Integer)
 
-        *   name: The name of the employee (String)
+    - name: The name of the employee (String)
 
-        *   position: The current role of the employee in the company (String)
+    - position: The current role of the employee in the company (String)
 
-        *   salary: The current salary of the employee (Integer)
+    - salary: The current salary of the employee (Integer)
 
-    *   Initially, **the "Save" buttons for saving a new salary are disabled.**
+  - Initially, **the "Save" buttons for saving a new salary are disabled.**
 
-    *   The salary field becomes editable when clicked.
+  - The salary field becomes editable when clicked.
 
-    *   The "Save" button for a specific employee is only enabled when the edited salary value is set and different from the existing value.
+  - The "Save" button for a specific employee is only enabled when the edited salary value is set and different from the existing value.
 
-    *   Clicking the "Save" button updates the salary field with the new value, and the salary field again becomes not editable.
+  - Clicking the "Save" button updates the salary field with the new value, and the salary field again becomes not editable.
 
-*   **For the AddEmployee component:**
+- **For the AddEmployee component:**
 
-    *   Each new employee added to the list should have a unique incremental ID property attached to it.
+  - Each new employee added to the list should have a unique incremental ID property attached to it.
 
-    *   Initially, the "Add" button for adding a new employee entry is disabled.
+  - Initially, the "Add" button for adding a new employee entry is disabled.
 
-    *   The "Add" button becomes enabled only when all fields are filled.
+  - The "Add" button becomes enabled only when all fields are filled.
 
-    *   Clicking the "Add" button adds a new employee entry to the table and reset input fields.
+  - Clicking the "Add" button adds a new employee entry to the table and reset input fields.
 
 The following data-testid attributes are required in the component for the tests to pass:
 
-*   The table should have the data-testid attribute 'table'.
-*   The employee uneditable salary fields should have the data-testid attributes 'employee-salary-div-0', 'employee-salary-div-1', and so on.
-*   The employee salary inputs should have the data-testid attributes 'employee-salary-input-0', 'employee-salary-input-1', and so on.
-*   The "Save" buttons should have the data-testid attributes 'employee-save-button-0', 'employee-save-button-1', and so on.
-*   The new employee name input should have the data-testid attribute 'new-employee-name-input'.
-*   The new employee position input should have the data-testid attribute 'new-employee-position-input'.
-*   The new employee salary input should have the data-testid attribute 'new-employee-salary-input'.
-*   The "Add" button should have the data-testid attribute 'add-new-employee-button'.
+- The table should have the data-testid attribute 'table'.
+- The employee uneditable salary fields should have the data-testid attributes 'employee-salary-div-0', 'employee-salary-div-1', and so on.
+- The employee salary inputs should have the data-testid attributes 'employee-salary-input-0', 'employee-salary-input-1', and so on.
+- The "Save" buttons should have the data-testid attributes 'employee-save-button-0', 'employee-save-button-1', and so on.
+- The new employee name input should have the data-testid attribute 'new-employee-name-input'.
+- The new employee position input should have the data-testid attribute 'new-employee-position-input'.
+- The new employee salary input should have the data-testid attribute 'new-employee-salary-input'.
+- The "Add" button should have the data-testid attribute 'add-new-employee-button'.
 
 Please note that the component has the above data-testid attributes for test cases and certain classes and ids for rendering purposes. It is advised not to change them.
 
-## Environment 
+## Environment
 
 - React Version: 16.13.1
 - Node Version: 14(LTS)
 - Default Port: 8000
 
-## Project Specifications 
+## Project Specifications
 
 **Read-Only Files**
+
 - `src/App.test.js`
 
 **Commands**
-- run: 
+
+- run:
+
 ```bash
 npm start
 ```
-- install: 
+
+- install:
+
 ```bash
 npm install
 ```
-- test: 
+
+- test:
+
 ```bash
 npm test
 ```
+
+# Notes
+
+I wanted to allow the componets to be highly re-usable so the parent provides a callback to each of them to save the table state. I wanted the table state to live in the parent.
+
+I had an issue with the test suite I feel it's not properly unmounting the application before each test. The useEffect below should reset the state on unmount, however tests are retaining the app state effecting the next test run.
+
+```Javascript
+  // set employeeList object to state
+  useEffect(() => {
+    setEmployees(employeesList);
+    // reset state on mount and unmount
+    return () => setEmployees([]); <- should reset the state on unmount
+  }, []);
+```
+
+I added a .devcontainer file to this project you should be able to use the "Clone from repository" from the [Remote-Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) VSCode extension. This will create an identical dev environment in a [Docker](https://www.docker.com/) container, to the one I've used for this project.
