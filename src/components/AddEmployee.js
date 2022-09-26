@@ -10,7 +10,10 @@ const AddEmployee = ({ onSave }) => {
     position: '',
     salary: ''
   });
-
+  /**
+   * set the state object property for the input
+   * @param {Object} event - event obj from input
+   */
   const handleInput = (event) => {
     const { name, value } = event.target;
     setEmployeeRecord((previousState) => ({
@@ -18,6 +21,9 @@ const AddEmployee = ({ onSave }) => {
       [name]: value
     }));
   };
+  /**
+   * Save the record to the parent
+   */
   const handleSave = () => {
     // save record
     onSave(employeeRecord);
