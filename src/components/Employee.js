@@ -3,17 +3,17 @@ import React, { Fragment, useState } from 'react';
 /**
  * Displays the employee table data for the row
  * @param {number} idx - index from the parent loop
- * @param {Object} employeeInfo - id:number, name:string, postion:sting, salary:number
+ * @param {Object} employeeInfo - id:number, name:string, postion:string, salary:number
  * @param {func} onSave - Callback when an employees salary is updated
  * @returns {JSX} Employee
  */
 const Employee = ({ idx, employeeInfo, onSave }) => {
-  const [editSalary, setEditSalary] = useState(true);
+  const [editSalary, setEditSalary] = useState(false);
   const { name, position, salary } = employeeInfo;
   const [salaryInputValue, setSalaryInputValue] = useState(salary);
 
   /**
-   * handle save
+   * handle saving the employees salary
    */
   const handleSave = () => {
     // set inverse of current state
@@ -23,20 +23,22 @@ const Employee = ({ idx, employeeInfo, onSave }) => {
     // callback to save new salary
     onSave(employeeInfo);
   };
+
   return (
     <Fragment>
       <td>{name}</td>
       <td className="pl-20">{position}</td>
       <td className="pl-20">
-        {editSalary ? (
+        {!editSalary ? (
           <div
             data-testid={'employee-salary-div-' + idx}
-            onClick={() => setEditSalary(false)}
+            onClick={() => setEditSalary(true)}
           >
             {salary}
           </div>
         ) : (
           <input
+            aria-label="Employee Salary Input"
             data-testid={'employee-salary-input-' + idx}
             type="number"
             value={salaryInputValue}
@@ -46,9 +48,15 @@ const Employee = ({ idx, employeeInfo, onSave }) => {
       </td>
       <td className="pl-20">
         <button
+          aria-label="Employee Save Button"
           className={'x-small w-75 ma-0 px-25'}
           data-testid={'employee-save-button-' + idx}
-          disabled={editSalary}
+          disabled={
+            !editSalary ||
+            isNaN(parseInt(salaryInputValue)) ||
+            parseInt(salary) === parseInt(salaryInputValue) ||
+            parseInt(salaryInputValue) === 0
+          }
           onClick={handleSave}
         >
           Save
