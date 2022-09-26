@@ -1,16 +1,30 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 
 /**
  * Displays the employee table data for the row
  * @param {number} idx - index from the parent loop
  * @param {Object} employeeInfo - id:number, name:string, postion:string, salary:number
- * @param {func} onSave - Callback when an employees salary is updated
  * @returns {JSX} Employee
  */
-const Employee = ({ idx, employeeInfo, onSave }) => {
+const Employee = ({ idx, employeeInfo }) => {
   const [editSalary, setEditSalary] = useState(false);
-  const { name, position, salary } = employeeInfo;
-  const [salaryInputValue, setSalaryInputValue] = useState(salary);
+  const [salaryInputValue, setSalaryInputValue] = useState('');
+  const [employeeRecord, setEmployeeRecord] = useState({});
+
+  /**
+   * set state when the passed prop changes (for new employees)
+   */
+  useEffect(() => {
+    // create immutable object so it doesn't effect the parent state
+    setEmployeeRecord({ ...employeeInfo });
+    setSalaryInputValue(employeeInfo.salary);
+    // clear state on unmount
+    return () => {
+      setEmployeeRecord({});
+      setSalaryInputValue('');
+      setEditSalary(false);
+    };
+  }, [employeeInfo]);
 
   /**
    * handle saving the employees salary
@@ -18,23 +32,24 @@ const Employee = ({ idx, employeeInfo, onSave }) => {
   const handleSave = () => {
     // set inverse of current state
     setEditSalary(!editSalary);
-    // update passed employee info with new salary
-    employeeInfo.salary = salaryInputValue;
-    // callback to save new salary
-    onSave(employeeInfo);
+    // set new salary
+    setEmployeeRecord((previousState) => ({
+      ...previousState,
+      salary: salaryInputValue
+    }));
   };
 
   return (
     <Fragment>
-      <td>{name}</td>
-      <td className="pl-20">{position}</td>
+      <td>{employeeRecord.name}</td>
+      <td className="pl-20">{employeeRecord.position}</td>
       <td className="pl-20">
         {!editSalary ? (
           <div
             data-testid={'employee-salary-div-' + idx}
             onClick={() => setEditSalary(true)}
           >
-            {salary}
+            {employeeRecord.salary}
           </div>
         ) : (
           <input
@@ -54,7 +69,7 @@ const Employee = ({ idx, employeeInfo, onSave }) => {
           disabled={
             !editSalary ||
             isNaN(parseInt(salaryInputValue)) ||
-            parseInt(salary) === parseInt(salaryInputValue) ||
+            parseInt(employeeRecord.salary) === parseInt(salaryInputValue) ||
             parseInt(salaryInputValue) === 0
           }
           onClick={handleSave}
