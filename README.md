@@ -103,5 +103,8 @@ I had an issue with the test suite I feel it's not properly unmounting the appli
     return () => setEmployees([]); <- should reset the state on unmount
   }, []);
 ```
+![image](https://user-images.githubusercontent.com/7494473/192348787-b8871726-7028-469d-a69c-a8d5a515f950.png)
+![image](https://user-images.githubusercontent.com/7494473/192348964-90cf2324-30e6-4409-970c-0917e4e4a4dd.png)
+
 
 I added a .devcontainer file to this project you should be able to use the "Clone from repository" from the [Remote-Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) VSCode extension. This will create an identical dev environment in a [Docker](https://www.docker.com/) container, to the one I've used for this project.
