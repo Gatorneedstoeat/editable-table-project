@@ -1,30 +1,56 @@
-import React, { Fragment } from 'react'
-import 'h8k-components'
+import React, { Fragment, useState, useEffect } from 'react';
+import 'h8k-components';
 
-import { AddEmployee, Employee } from './components'
+import { AddEmployee, Employee } from './components';
 
 const employeesList = [
   {
     id: 0,
     name: 'Chris Hatch',
     position: 'Software Developer',
-    salary: 130000,
+    salary: 130000
   },
   {
     id: 1,
     name: 'Elizabeth Montgomery',
     position: 'Lead Research Engineer',
-    salary: 70000,
+    salary: 70000
   },
   {
     id: 2,
     name: 'Aiden Shaw',
     position: 'Machine Learning Engineer',
-    salary: 80000,
-  },
-]
+    salary: 80000
+  }
+];
 
 const App = () => {
+  const [employees, setEmployees] = useState(employeesList);
+
+  useEffect(() => {
+    setEmployees(employeesList);
+
+    return () => {
+      // clean up state on mount and unmount
+      setEmployees({});
+    };
+  }, []);
+
+  const handleUpdateSalary = (employeeRecord) => {
+    setEmployees((previousState) => {
+      return previousState.map((item) => {
+        if (item.id === employeeRecord.id) {
+          return { ...employeeRecord };
+        }
+        return item;
+      });
+    });
+  };
+  const handleAddingEmployee = (employeeRecord) => {
+    setEmployees((previousState) => {
+      return [...previousState, employeeRecord];
+    });
+  };
   return (
     <Fragment>
       <nav>
@@ -41,19 +67,24 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {employeesList.map((employee, idx) => (
-              <tr key={employee.id} data-testid={`row-${idx}`}>
-                <Employee idx={idx} />
-              </tr>
-            ))}
+            {employees &&
+              employees.map((employeeInfo, idx) => (
+                <tr key={employeeInfo.id} data-testid={`row-${idx}`}>
+                  <Employee
+                    employeeInfo={employeeInfo}
+                    idx={idx}
+                    onSave={handleUpdateSalary}
+                  />
+                </tr>
+              ))}
             <tr>
-              <AddEmployee />
+              <AddEmployee onSave={handleAddingEmployee} />
             </tr>
           </tbody>
         </table>
       </div>
     </Fragment>
-  )
-}
+  );
+};
 
-export default App
+export default App;
