@@ -10,7 +10,9 @@
   --brand-box-shadow-hover: rgba(0, 20, 30, 0.3);
   --brand-disabled: rgba(0, 220, 230, 0.2);
 }
-
+#root {
+  overflow: scroll;
+}
 * {
   box-sizing: border-box;
 }
