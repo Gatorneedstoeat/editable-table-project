@@ -51,7 +51,7 @@ const App = () => {
       <nav>
         <h1>Editable Table</h1>
       </nav>
-      <div className="card w-45 mx-auto mt-100 pb-5">
+      <div className="card mx-auto mt-100 pb-5">
         <table data-testid="table">
           <thead>
             <tr>
