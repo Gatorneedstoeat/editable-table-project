@@ -20,6 +20,12 @@
 
 input {
   height: 30px;
+  border-radius: 4px;
+  padding: 1rem;
+}
+
+input:focus {
+  border: 1px solid var(--brand-color);
 }
 
 button {
@@ -43,6 +49,20 @@ table thead tr th {
   text-transform: uppercase;
 }
 
+table tbody tr td:nth-child(3) div {
+  transition: linear 0.3s;
+  width: fit-content;
+}
+
+table tbody tr td:nth-child(3) div:hover {
+  cursor: pointer;
+  border-bottom: 2px solid var(--brand-color);
+}
+.fa-pen {
+  margin-left: 7px;
+  font-size: 0.75rem;
+  color: var(--brand-color);
+}
 /* ------
 /* nav styles */
 

@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 /**
  * Displays the employee table data for the row
  * @param {number} idx - index from the parent loop
@@ -50,6 +51,7 @@ const Employee = ({ idx, employeeInfo }) => {
             onClick={() => setEditSalary(true)}
           >
             {employeeRecord.salary}
+            <FontAwesomeIcon icon={faPen} />
           </div>
         ) : (
           <input
