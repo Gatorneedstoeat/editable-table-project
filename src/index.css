@@ -11,7 +11,8 @@
   --brand-disabled: rgba(0, 220, 230, 0.2);
 }
 #root {
-  overflow: scroll;
+  overflow: auto;
+  padding: 1rem;
 }
 * {
   box-sizing: border-box;
